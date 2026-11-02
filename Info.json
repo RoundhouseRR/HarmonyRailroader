@@ -1,0 +1,18 @@
+{
+  "identifier": "roundhouserr/harmony-railroader",
+  "version": "2.4.3",
+  "name": "HarmonyRailroader",
+  "author": "RoundhouseRR",
+  "description": "Provides one shared copy of the Harmony patching library for other mods, so they don't each need to bundle it.",
+  "license": "MIT",
+  "scope": "unscoped",
+  "assemblies": ["HarmonyRailroader.dll"],
+  "load": {
+    "priority": -1000
+  },
+  "dependencies": {
+    "required": [
+      "rr/game >=0.6.0"
+    ]
+  }
+}

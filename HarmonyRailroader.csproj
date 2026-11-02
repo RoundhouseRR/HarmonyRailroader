@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>HarmonyRailroader</AssemblyName>
+    <RootNamespace>HarmonyRailroader</RootNamespace>
+    <Version>2.4.3</Version>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <RrManagedDir Condition="'$(RrManagedDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Railroader\Railroader_Data\Managed</RrManagedDir>
+    <ModDirectory Condition="'$(ModDirectory)' == ''">$(USERPROFILE)\Documents\Railroader\Mods\HarmonyRailroader\</ModDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Shipped next to HarmonyRailroader.dll. The provider must never use Harmony types itself. -->
+    <PackageReference Include="Lib.Harmony" Version="2.4.3" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Railroader.Modding">
+      <HintPath>$(RrManagedDir)\Railroader.Modding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Railroader">
+      <HintPath>$(RrManagedDir)\Railroader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>$(RrManagedDir)\netstandard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="InstallMod" AfterTargets="Build">
+    <MakeDir Directories="$(ModDirectory)" />
+    <Copy SourceFiles="$(OutputPath)HarmonyRailroader.dll;$(OutputPath)0Harmony.dll;Info.json;LICENSE-Harmony.txt" DestinationFolder="$(ModDirectory)" />
+  </Target>
+</Project>
